@@ -77,17 +77,6 @@ selectAndRetrieveArticleTitle() {
     
 }
 
-verifyArticleTitleInPageTitle() {
-    //validating the article link
-    cy.get('@articlelink').then((articlelink) => {
-        cy.location('pathname').should('equal', articlelink);
-    });
-
-    //validate a word from page title 
-    cy.title().should('include', this.articlePageTitle);
-}
-
-
 verifySocialMediaLinksExist() {
     cy.get(this.socialFooter).within(() => {
      // using within to restrict the scoop of only social icons
