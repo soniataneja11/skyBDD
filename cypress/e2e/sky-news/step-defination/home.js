@@ -1,6 +1,6 @@
 import {Given, When, Then} from '@badeball/cypress-cucumber-preprocessor';
 import homePage from '../page-objects/homePage';
-
+import articlePage from '../page-objects/articlePage';
 
 Given('the user open the Sky News website', () => {
     homePage.visit();
@@ -31,7 +31,7 @@ Then('the user should see the categories and their count as defined in {string} 
 });
 
 Then('the article title should appear in browsers page title', () => {
-    homePage.verifyArticleTitleInPageTitle();
+    articlePage.verifyArticleTitleInPageTitle();
 });
 
 Then('the focused category should be {string}', (category) => {

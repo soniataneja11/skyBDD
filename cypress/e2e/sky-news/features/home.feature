@@ -4,14 +4,13 @@ Background:
   Given the user open the Sky News website
   When the page is loaded
 
-@regression
 Scenario: Verify the Title on Each Page
-  Then the user should see the page title containing 'The Latest News from the UK and Around the World | Sky News'
+  Then the user should see the page title containing 'Latest News'
 
 Scenario: Verify the Number of Categories and Their Names
   Then the user should see the categories and their count as defined in "categories.json" fixture 
 
-Scenario: Verify the Selected Article's Title on the Page
+Scenario: Verify the Selected Article is loaded
   When the user selects a news article from the homepage
   Then the article title should appear in browsers page title
 

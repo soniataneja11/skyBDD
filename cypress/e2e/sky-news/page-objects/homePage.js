@@ -7,7 +7,6 @@ heading = 'Top Stories';
 articlePageTitle;
 
 //Page Selectors
-articleTitle = ".sdc-site-tile__headline-link > span";
 articleLink = ".sdc-site-tile__headline-link";
 categoryListSelector = "[data-testid='site-header-main-nav'] > li";
 pageHeading = "[data-role='short-text-target']";
@@ -17,10 +16,6 @@ visit() {
     cy.visit('/');
     cy.setViewportDimensions();
     cy.acceptCookies();
-}
-
-getTitle() {
-    return cy.title();
 }
 
 verifyPageTitle(pageTitle) {
@@ -65,24 +60,33 @@ verifyCategoriesFromFixture(fixtureName) {
 }
 
 selectAndRetrieveArticleTitle() {
-    cy.get(this.articleTitle)
-    .first() //eq to randamize
+    // capturing the article link to assert
+    cy.get(this.articleLink).first().should('have.attr','href').as('articlelink')
+
+    //capturing the article title to assert 
+    cy.get(this.articleLink).first().find('span')
     .invoke('text')
     .as('SelectedArticleTitle'); 
 
     cy.get('@SelectedArticleTitle').then((selectedArticleTitle) => {
-        //this.articlePageTitle=selectedArticleTitle
-        const headlineWord = selectedArticleTitle.split(' ');
-        this.articlePageTitle = headlineWord[0];
+        this.articlePageTitle = selectedArticleTitle.split(' ')[1];
     });
         
+    //clicking on first article
     cy.get(this.articleLink).first().click();
     
 }
 
 verifyArticleTitleInPageTitle() {
-    this.getTitle().should('include', this.articlePageTitle);
+    //validating the article link
+    cy.get('@articlelink').then((articlelink) => {
+        cy.location('pathname').should('equal', articlelink);
+    });
+
+    //validate a word from page title 
+    cy.title().should('include', this.articlePageTitle);
 }
+
 
 verifySocialMediaLinksExist() {
     cy.get(this.socialFooter).within(() => {
