@@ -23,7 +23,7 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "cypress/e2e/sky-news/step-defination/*.js",
+    "stepDefinitions": "cypress/e2e/sky-news/steps/*.js",
     "filterSpecs": true,
     "omitFiltered": true
   }
